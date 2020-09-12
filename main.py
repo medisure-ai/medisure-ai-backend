@@ -5,7 +5,6 @@ from dotenv import load_dotenv, find_dotenv
 
 from gpt import GPT, Example, set_openai_key
 
-
 app = Flask(__name__)
 
 load_dotenv(find_dotenv(), override=True)
