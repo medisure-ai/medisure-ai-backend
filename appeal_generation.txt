@@ -1,0 +1,36 @@
+Generation:
+Notes:
+->Another option is to work with a professional patient advocacy company. It might cost between $125 and $300 for an initial review and then you’ll be billed hourly.
+
+Under the Affordable Care Act (ACA), when treatment is denied, you have the legal right to ask for an internal review. If this appeal is denied, you have the legal right to ask for an independent, external review. 
+Note that Affordable Care Act (ACA) now requires a 72-hour  expedited internal review for urgent care. This time frame is required for plan years or policy years beginning on July 1, 2012.]
+
+
+-------Prompt-----------------------------------------------------------------------------------
+
+
+Dear Aetna,
+I am writing to appeal the [name of Health Plan] decision to deny [name of service, procedure, or treatment sought] for me. This procedure took place on June 15th 2020.
+
+It is our understanding that Aetna is denying coverage on the basis that "[cite Health Plan’s language in the denial letter]." [Attach denial letter.] We believe that [name of service, procedure, or treatment sought] is medically necessary to treat [name of Plan member if other than yourself]’s medical condition and that [name of service, procedure, or treatment sought] is a covered plan benefit.
+
+[Name of Health Plan] covers medically necessary services that are not expressly excluded, which are described in the Evidence of Coverage.
+The entire treatment team has recommended that [name of service, procedure, or treatment sought] is medically necessary. [Attach supporting medical letter.]
+
+Contrary to your letter, [name of service, procedure, or treatment sought] is a covered service. [Name of service, procedure, or treatment sought] is stated as a covered benefit in your HMO Member Handbook, is implicitly covered in the Evidence of Coverage, and is not expressly excluded as a covered service in the Evidence of Coverage. [Quote from Member Handbook and Evidence of Coverage to establish that the service, procedure, or treatment is a covered benefit and not expressly excluded.] [Cite your state’s mandated benefit laws requiring that the health plan provide this coverage.]
+
+[Describe member’s health condition, and why the service, procedure, or treatment would benefit the member and the consequences if the patient does not receive this treatment.]
+
+[If the treatment is out-of-network, establish that there are no comparable services offered within the network.]
+
+[Finally, if you feel they won’t cover the service because of the precedent, ask them to consider covering it as an extra-contractual benefit, and to pay for the service, procedure, or treatment out of the Health Plan’s catastrophic payment pool.]
+
+[If the member requires immediate treatment for the condition, request an expedited hearing – request that they respond within 72 hours of mailing of the letter. Note that ACA now requires a 72-hour  expedited internal review for urgent care. This time frame is required for plan years or policy years beginning on July 1, 2012.]
+
+[Attach a letter from your treating physician describing the person’s condition.]
+
+Thank you for your immediate attention to this matter.
+
+Sincerely,
+
+[Your name]
