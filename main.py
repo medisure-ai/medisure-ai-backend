@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 import os
 from dotenv import load_dotenv, find_dotenv
@@ -35,7 +35,8 @@ def hello_world():
 
 @app.route("/gpt3")
 def gpt3():
-    prompt = "integral from a to b of f of x"
+    prompt = request.data.decode("UTF-8")
+    print(prompt)
     return gpt.get_top_reply(prompt)
 
 
