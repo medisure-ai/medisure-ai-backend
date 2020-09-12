@@ -1,7 +1,5 @@
 runtime: python37
 
-entrypoint: gunicorn -b :$PORT main:app
-
 #smallest instance class
 instance_class: F2
 
