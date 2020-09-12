@@ -79,6 +79,3 @@ def parse_table(input_uri):
     blob.upload_from_string(data)
 
     return out_bucket
-
-
-print(parse_table("SBC_2017_SC_725195_Off.pdf"))

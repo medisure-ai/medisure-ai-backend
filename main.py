@@ -3,7 +3,8 @@ from flask import Flask, request
 import os
 from dotenv import load_dotenv, find_dotenv
 
-from gpt import GPT, Example, set_openai_key
+from scripts.gpt import GPT, Example, set_openai_key
+from scripts.vision import parse_table
 
 app = Flask(__name__)
 
@@ -30,6 +31,12 @@ gpt.add_example(
 @app.route("/")
 def hello_world():
     return "Hello, World!"
+
+
+@app.route("/vision")
+def parse_pdf():
+    document = request.data.decode("UTF-8")
+    return parse_table(document)
 
 
 @app.route("/gpt3")
