@@ -10,9 +10,17 @@ import secrets
 load_dotenv(find_dotenv(), override=True)
 PROJECT_ID = os.getenv("GOOGLE_PROJECT_ID", "")
 BUCKET_URL = os.getenv("GOOGLE_BUCKET_URL", "")
+BUCKET_NAME = os.getenv("GOOGLE_BUCKET_NAME", "")
+
+storage_client = storage.Client()
+bucket = storage_client.bucket(BUCKET_NAME)
 
 
-def parse_table(input_uri):
+def parse_table(filename):
+    input_uri = secrets.token_hex(nbytes=16)
+    blob = bucket.blob(input_uri)
+    blob.upload_from_filename(filename)
+
     client = documentai.DocumentUnderstandingServiceClient()
     gcs_source = documentai.types.GcsSource(uri=BUCKET_URL + input_uri)
 
@@ -71,11 +79,8 @@ def parse_table(input_uri):
                 out.append("")
 
     data = " ".join("\n".join(out).split(" ")[:750])
-    out_bucket = secrets.token_hex(nbytes=16)
-
-    storage_client = storage.Client()
-    bucket = storage_client.bucket("pennapps-2020-vision")
-    blob = bucket.blob(out_bucket)
+    out_uri = secrets.token_hex(nbytes=16)
+    blob = bucket.blob(out_uri)
     blob.upload_from_string(data)
 
-    return out_bucket
+    return out_uri

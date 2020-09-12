@@ -1,4 +1,6 @@
 from flask import Flask, request
+from werkzeug.utils import secure_filename
+from flask_cors import CORS
 
 import os
 from dotenv import load_dotenv, find_dotenv
@@ -9,7 +11,12 @@ from google.cloud import storage
 
 from scripts.vision import parse_table
 
+UPLOAD_FOLDER = os.path.join(".", "uploads")
+ALLOWED_EXTENSIONS = {"pdf"}
+
 app = Flask(__name__)
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+CORS(app)
 
 load_dotenv(find_dotenv(), override=True)
 set_openai_key(os.getenv("GPT_SECRET_KEY", ""))
@@ -24,10 +31,12 @@ def hello_world():
     return "Hello, World!"
 
 
-@app.route("/vision")
+@app.route("/vision", methods=["GET", "POST"])
 def parse_pdf():
-    document = request.data.decode("UTF-8")
-    return parse_table(document)
+    file = request.files["file"]
+    filename = secure_filename(file.filename)
+    file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+    return parse_table(filename)
 
 
 vision_GPT = GPT(engine="davinci", temperature=0.5, max_tokens=200)
@@ -49,7 +58,7 @@ for example in vision_examples:
     vision_GPT.add_example(Example(example[0], example[1]))
 
 
-@app.route("/vision/qa")
+@app.route("/vision/qa", methods=["GET", "POST"])
 def question_answer():
     blob = bucket.blob(request.args.get("doc"))
     text = blob.download_as_text()
@@ -58,6 +67,8 @@ def question_answer():
     return vision_GPT.get_top_reply(prompt)
 
 
+summarize_GPT = GPT(engine="davinci", temperature=0.5, max_tokens=100)
+summarize_GPT.set_premise("My fifth grader asked me what this passage means")
 summarize_GPT = GPT(engine="davinci", temperature=0.5, max_tokens=300)
 summarize_examples = [
     [
@@ -77,7 +88,7 @@ for example in summarize_examples:
     summarize_GPT.add_example(Example(example[0], example[1]))
 
 
-@app.route("/summarize")
+@app.route("/summarize", methods=["GET", "POST"])
 def gpt3():
     prompt = request.data.decode("UTF-8")
     return summarize_GPT.get_top_reply(prompt)

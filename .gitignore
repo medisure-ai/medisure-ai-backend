@@ -3,3 +3,4 @@
 
 .env
 gcloud.json
+uploads/*
