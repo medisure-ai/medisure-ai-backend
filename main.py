@@ -28,11 +28,13 @@ bucket = storage_client.bucket(BUCKET_NAME)
 
 
 @app.route("/")
+@cross_origin()
 def hello_world():
     return "Hello, World!"
 
 
 @app.route("/vision", methods=["GET", "POST"])
+@cross_origin()
 def parse_pdf():
     file = request.files["file"]
     filename = secure_filename(file.filename)
@@ -60,6 +62,7 @@ for example in vision_examples:
 
 
 @app.route("/vision/qa", methods=["GET", "POST"])
+@cross_origin()
 def question_answer():
     blob = bucket.blob(request.args.get("doc"))
     text = blob.download_as_text()
@@ -90,6 +93,7 @@ for example in summarize_examples:
 
 
 @app.route("/summarize", methods=["GET", "POST"])
+@cross_origin()
 def gpt3():
     prompt = request.data.decode("UTF-8")
     return summarize_GPT.get_top_reply(prompt)
