@@ -16,6 +16,7 @@ ALLOWED_EXTENSIONS = {"pdf"}
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["CORS_HEADERS"] = "Content-Type"
 CORS(app)
 
 load_dotenv(find_dotenv(), override=True)
