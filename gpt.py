@@ -54,8 +54,11 @@ class GPT:
         output_prefix="output: ",
         output_suffix="\n\n",
         append_output_prefix_to_query=False,
+        premise_prefix="",
+        premise_suffix="\n\n",
     ):
         self.examples = {}
+        self.premise = ""
         self.engine = engine
         self.temperature = temperature
         self.max_tokens = max_tokens
@@ -64,7 +67,13 @@ class GPT:
         self.output_prefix = output_prefix
         self.output_suffix = output_suffix
         self.append_output_prefix_to_query = append_output_prefix_to_query
+        self.premise_prefix = premise_prefix
+        self.premise_suffix = premise_suffix
         self.stop = (output_suffix + input_prefix).strip()
+
+    def set_premise(self, premise):
+        """Sets a premise on the object. """
+        self.premise = premise
 
     def add_example(self, ex):
         """Adds an example to the object.
@@ -105,7 +114,9 @@ class GPT:
 
     def craft_query(self, prompt):
         """Creates the query for the API request."""
-        q = self.get_prime_text() + self.input_prefix + prompt + self.input_suffix
+        premise = self.premise
+        q = self.premise_prefix + premise + self.premise_suffix if premise else ""
+        q = q + self.get_prime_text() + self.input_prefix + prompt + self.input_suffix
         if self.append_output_prefix_to_query:
             q = q + self.output_prefix
 
