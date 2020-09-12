@@ -4,6 +4,9 @@ import os
 from dotenv import load_dotenv, find_dotenv
 
 from scripts.gpt import GPT, Example, set_openai_key
+
+from google.cloud import storage
+
 from scripts.vision import parse_table
 
 app = Flask(__name__)
@@ -11,21 +14,9 @@ app = Flask(__name__)
 load_dotenv(find_dotenv(), override=True)
 set_openai_key(os.getenv("GPT_SECRET_KEY", ""))
 
-gpt = GPT(engine="davinci", temperature=0.5, max_tokens=100)
-
-
-gpt.add_example(Example("Two plus two equals four", "2 + 2 = 4"))
-gpt.add_example(Example("The integral from zero to infinity", "\\int_0^{\\infty}"))
-gpt.add_example(
-    Example(
-        "The gradient of x squared plus two times x with respect to x",
-        "\\nabla_x x^2 + 2x",
-    )
-)
-gpt.add_example(Example("The log of two times x", "\\log{2x}"))
-gpt.add_example(
-    Example("x squared plus y squared plus equals z squared", "x^2 + y^2 = z^2")
-)
+BUCKET_NAME = os.getenv("GOOGLE_BUCKET_NAME", "")
+storage_client = storage.Client()
+bucket = storage_client.bucket(BUCKET_NAME)
 
 
 @app.route("/")
@@ -39,11 +30,57 @@ def parse_pdf():
     return parse_table(document)
 
 
-@app.route("/gpt3")
+vision_GPT = GPT(engine="davinci", temperature=0.5, max_tokens=200)
+vision_examples = [
+    [
+        "What is not included in the out of pocket limit?",
+        "Premiums and health cares this plan does not cover are not included. Even though you pay these expenses, they do not count towards the limit",
+    ],
+    [
+        "Do I need a referral to see a specialist?",
+        "No. You can see a specialist you choose without permission from this plan.",
+    ],
+    [
+        "Are diagnostic x-rays covered?",
+        "In network diagnostics are a maximum of $10 copay while out of network diagnostics are not covered.",
+    ],
+]
+for example in vision_examples:
+    vision_GPT.add_example(Example(example[0], example[1]))
+
+
+@app.route("/vision/qa")
+def question_answer():
+    blob = bucket.blob(request.args.get("doc"))
+    text = blob.download_as_text()
+    vision_GPT.set_premise(text)
+    prompt = request.data.decode("UTF-8")
+    return vision_GPT.get_top_reply(prompt)
+
+
+summarize_GPT = GPT(engine="davinci", temperature=0.5, max_tokens=300)
+summarize_examples = [
+    [
+        "Cancer symptoms and signs depend on the specific type and grade of cancer; although general signs and symptoms are not very specific the following can be found in patients with different cancers: fatigue, weight loss, pain, skin changes, change in bowel or bladder function, unusual bleeding, persistent cough or voice change, fever, lumps, or tissue masses.",
+        "Cancer can have many symptoms including fatigue, pain, and tissue masses.",
+    ],
+    [
+        "Diabetes mellitus is a disorder in which blood sugar (glucose) levels are abnormally high because the body does not produce enough insulin to meet its needs. Urination and thirst are increased, and people may lose weight even if they are not trying to.",
+        "Diabetes is a disease where your blood sugar levels are too high.",
+    ],
+    [
+        "A copayment or copay is a fixed amount for a covered service, paid by a patient to the provider of service before receiving the service. It may be defined in an insurance policy and paid by an insured person each time a medical service is accessed. ",
+        "A copay is a fixed out-of-pocket amount paid by an insured for covered services.",
+    ],
+]
+for example in summarize_examples:
+    summarize_GPT.add_example(Example(example[0], example[1]))
+
+
+@app.route("/summarize")
 def gpt3():
     prompt = request.data.decode("UTF-8")
-    print(prompt)
-    return gpt.get_top_reply(prompt)
+    return summarize_GPT.get_top_reply(prompt)
 
 
 if __name__ == "__main__":
