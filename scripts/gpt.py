@@ -88,6 +88,10 @@ class GPT:
         if id in self.examples:
             del self.examples[id]
 
+    def delete_all_examples(self):
+        """Delete all examples"""
+        self.examples = {}
+
     def get_example(self, id):
         """Get a single example."""
         return self.examples.get(id, None)

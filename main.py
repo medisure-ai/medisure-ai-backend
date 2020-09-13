@@ -63,7 +63,7 @@ def question_answer():
     blob = bucket.blob(request.args.get("doc"))
     text = blob.download_as_text()
     vision_GPT.set_premise(text)
-
+    vision_GPT.delete_all_examples()
     for example in vision_qa_examples:
         vision_GPT.add_example(Example(example[0], example[1]))
     prompt = request.data.decode("UTF-8")
@@ -73,9 +73,9 @@ def question_answer():
 @app.route("/vision/summary", methods=["GET", "POST"])
 def summarize_doc():
     blob = bucket.blob(request.args.get("doc"))
-    text = blob.download_as_text()
-    vision_GPT.set_premise(text)
-    prompt = "My tenth grader asked me what this passage means"
+    prompt = "Could you summarize this in an easy to understand manner?"
+    vision_GPT.set_premise(blob.download_as_text())
+    vision_GPT.delete_all_examples()
     return vision_GPT.get_top_reply(prompt)
 
 
