@@ -42,7 +42,7 @@ def parse_pdf():
 
 
 vision_GPT = GPT(engine="davinci", temperature=0.5, max_tokens=200)
-vision_examples = [
+vision_qa_examples = [
     [
         "What is not included in the out of pocket limit?",
         "Premiums and health cares this plan does not cover are not included. Even though you pay these expenses, they do not count towards the limit",
@@ -56,8 +56,6 @@ vision_examples = [
         "In network diagnostics are a maximum of $10 copay while out of network diagnostics are not covered.",
     ],
 ]
-for example in vision_examples:
-    vision_GPT.add_example(Example(example[0], example[1]))
 
 
 @app.route("/vision/qa", methods=["GET", "POST"])
@@ -65,7 +63,19 @@ def question_answer():
     blob = bucket.blob(request.args.get("doc"))
     text = blob.download_as_text()
     vision_GPT.set_premise(text)
+
+    for example in vision_qa_examples:
+        vision_GPT.add_example(Example(example[0], example[1]))
     prompt = request.data.decode("UTF-8")
+    return vision_GPT.get_top_reply(prompt)
+
+
+@app.route("/vision/summary", methods=["GET", "POST"])
+def summarize_doc():
+    blob = bucket.blob(request.args.get("doc"))
+    text = blob.download_as_text()
+    vision_GPT.set_premise(text)
+    prompt = "My tenth grader asked me what this passage means"
     return vision_GPT.get_top_reply(prompt)
 
 

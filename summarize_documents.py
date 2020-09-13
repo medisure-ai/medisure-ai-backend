@@ -1,16 +1,14 @@
 from summarizer import Summarizer
 
-letterpath= "../resources/denial_letter.txt"
-
-def read_and_summarize(letterpath)
-	f= open("../resources/denial_letter.txt","r")
-	letter=f.read()
-	model = Summarizer()
-	#result1 = model(body, ratio=0.1)  # pass ratio
-	result2 = model(body, num_sentences=3)  # Will return 3 sentences 
-
-	print(result2)
-	return result2
+model = Summarizer()
 
 
-read_and_summarize(letterpath)
+def read_and_summarize(letterpath):
+    f = open("../resources/denial_letter.txt", "r")
+    body = f.read()
+    result = model(body, num_sentences=3)
+    return result
+
+
+letterpath = "../resources/denial_letter.txt"
+print(read_and_summarize(letterpath))
