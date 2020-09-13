@@ -1,0 +1,32 @@
+Collecting en_core_web_sm==2.3.1
+  Downloading https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz (12.0 MB)
+Requirement already satisfied: spacy<2.4.0,>=2.3.0 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from en_core_web_sm==2.3.1) (2.3.2)
+Requirement already satisfied: numpy>=1.15.0 in /Users/jaidevshah/.local/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (1.18.1)
+Requirement already satisfied: srsly<1.1.0,>=1.0.2 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (1.0.2)
+Requirement already satisfied: wasabi<1.1.0,>=0.4.0 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (0.8.0)
+Requirement already satisfied: catalogue<1.1.0,>=0.0.7 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (1.0.0)
+Requirement already satisfied: thinc==7.4.1 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (7.4.1)
+Requirement already satisfied: blis<0.5.0,>=0.4.0 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (0.4.1)
+Requirement already satisfied: setuptools in /Users/jaidevshah/.local/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (45.2.0)
+Requirement already satisfied: cymem<2.1.0,>=2.0.2 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (2.0.3)
+Requirement already satisfied: preshed<3.1.0,>=3.0.2 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (3.0.2)
+Requirement already satisfied: murmurhash<1.1.0,>=0.28.0 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (1.0.2)
+Requirement already satisfied: plac<1.2.0,>=0.9.6 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (1.1.3)
+Requirement already satisfied: requests<3.0.0,>=2.13.0 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (2.24.0)
+Requirement already satisfied: tqdm<5.0.0,>=4.38.0 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (4.49.0)
+Requirement already satisfied: importlib-metadata>=0.20; python_version < "3.8" in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from catalogue<1.1.0,>=0.0.7->spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (1.7.0)
+Requirement already satisfied: certifi>=2017.4.17 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from requests<3.0.0,>=2.13.0->spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (2020.6.20)
+Requirement already satisfied: chardet<4,>=3.0.2 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from requests<3.0.0,>=2.13.0->spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (3.0.4)
+Requirement already satisfied: idna<3,>=2.5 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from requests<3.0.0,>=2.13.0->spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (2.10)
+Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from requests<3.0.0,>=2.13.0->spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (1.25.10)
+Requirement already satisfied: zipp>=0.5 in /Users/jaidevshah/opt/anaconda3/envs/pennappsclone/lib/python3.7/site-packages (from importlib-metadata>=0.20; python_version < "3.8"->catalogue<1.1.0,>=0.0.7->spacy<2.4.0,>=2.3.0->en_core_web_sm==2.3.1) (3.1.0)
+Building wheels for collected packages: en-core-web-sm
+  Building wheel for en-core-web-sm (setup.py): started
+  Building wheel for en-core-web-sm (setup.py): finished with status 'done'
+  Created wheel for en-core-web-sm: filename=en_core_web_sm-2.3.1-py3-none-any.whl size=12047105 sha256=426c3a820120108fc90f0238b1b5fc20224a1752aa13807990d076133ef9003c
+  Stored in directory: /private/var/folders/z_/g22h__152n70m50t4bq56ckw0000gn/T/pip-ephem-wheel-cache-hujdb9vp/wheels/b7/0d/f0/7ecae8427c515065d75410989e15e5785dd3975fe06e795cd9
+Successfully built en-core-web-sm
+Installing collected packages: en-core-web-sm
+Successfully installed en-core-web-sm-2.3.1
+[38;5;2m✔ Download and installation successful[0m
+You can now load the model via spacy.load('en_core_web_sm')

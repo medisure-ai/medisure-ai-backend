@@ -2,7 +2,8 @@ Questions:
 
 What is the difference between an annual deductible and out of pocket maximum?
 
-What is a HMO plan?
+Q: What is a HMO plan?
+A: A Health Maintenance Organization (HMO) is a type of managed care plan. It is a plan that requires you to use doctors, hospitals, and other health care providers who are part of the plan's network. An HMO plan generally limits your choice of doctors, hospitals, and other health care providers.
 
 What is the difference between co-insurance and co-pay? 
 
