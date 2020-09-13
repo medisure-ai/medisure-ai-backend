@@ -88,7 +88,7 @@ def parse_table(filename, condense=False):
     out_uri = secrets.token_hex(nbytes=16)
     blob = bucket.blob(out_uri)
     blob.upload_from_string(data)
-    return out_uri, data
+    return out_uri
 
 
 def summarize(text):

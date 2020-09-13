@@ -85,7 +85,7 @@ def parse_denial():
     filename = secure_filename(file.filename)
     filename = os.path.join(app.config["UPLOAD_FOLDER"], filename)
     file.save(filename)
-    return parse_table(filename, summarize=True)
+    return parse_table(filename, condense=True)
 
 
 summarize_GPT = GPT(engine="davinci", temperature=0.2, max_tokens=200)
