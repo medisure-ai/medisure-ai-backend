@@ -15,7 +15,7 @@ storage_client = storage.Client()
 bucket = storage_client.bucket(BUCKET_NAME)
 
 
-def parse_table(filename):
+def parse_table(filename, condense=False):
     input_uri = secrets.token_hex(nbytes=16)
     blob = bucket.blob(input_uri)
     blob.upload_from_filename(filename)
@@ -80,7 +80,17 @@ def parse_table(filename):
     if len(data) < 1000:
         data = document.text
 
+    if condense:
+        data = summarize(data)
+
     out_uri = secrets.token_hex(nbytes=16)
     blob = bucket.blob(out_uri)
     blob.upload_from_string(data)
     return out_uri, data
+
+
+def summarize(text):
+    from summa import summarizer
+
+    summarizer.percentage = 0.9
+    return summarizer.summarize(text)
