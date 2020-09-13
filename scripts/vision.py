@@ -78,9 +78,12 @@ def parse_table(filename):
                     out.append(header_text[i] + ": " + _get_text(cell.layout))
                 out.append("")
 
-    data = " ".join("\n".join(out).split(" ")[:750])
+    data = ("\n".join(out)).split(" ")[:750]
+    if len(data) < 100:
+        data = document.text.split(" ")
+    data = " ".join(data)
+
     out_uri = secrets.token_hex(nbytes=16)
     blob = bucket.blob(out_uri)
     blob.upload_from_string(data)
-
     return out_uri

@@ -70,8 +70,7 @@ def question_answer():
 
 
 summarize_GPT = GPT(engine="davinci", temperature=0.5, max_tokens=100)
-summarize_GPT.set_premise("My fifth grader asked me what this passage means")
-summarize_GPT = GPT(engine="davinci", temperature=0.5, max_tokens=300)
+summarize_GPT.set_premise("My second grader asked me what this passage means")
 summarize_examples = [
     [
         "Cancer symptoms and signs depend on the specific type and grade of cancer; although general signs and symptoms are not very specific the following can be found in patients with different cancers: fatigue, weight loss, pain, skin changes, change in bowel or bladder function, unusual bleeding, persistent cough or voice change, fever, lumps, or tissue masses.",
@@ -87,7 +86,8 @@ summarize_examples = [
     ],
 ]
 for example in summarize_examples:
-    summarize_GPT.add_example(Example(example[0], example[1]))
+    # summarize_GPT.add_example(Example(example[0], example[1]))
+    pass
 
 
 @app.route("/summarize", methods=["GET", "POST"])
