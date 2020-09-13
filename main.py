@@ -79,6 +79,15 @@ def summarize_doc():
     return vision_GPT.get_top_reply(prompt)
 
 
+@app.route("/denial", methods=["GET", "POST"])
+def parse_denial():
+    file = request.files["file"]
+    filename = secure_filename(file.filename)
+    filename = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+    file.save(filename)
+    return parse_table(filename, summarize=True)
+
+
 summarize_GPT = GPT(engine="davinci", temperature=0.2, max_tokens=200)
 summarize_GPT.set_premise(
     "Could you answer these questions in an easy to understand way."

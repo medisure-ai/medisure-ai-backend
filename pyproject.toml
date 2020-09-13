@@ -15,6 +15,7 @@ google-cloud-storage = "^1.31.0"
 grpcio = "^1.32.0"
 google-cloud-documentai = "^0.2.0"
 flask-cors = "^3.0.9"
+bert-extractive-summarizer = "^0.5.0"
 
 [tool.poetry.dev-dependencies]
 
