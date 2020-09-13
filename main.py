@@ -88,22 +88,20 @@ def parse_denial():
     return parse_table(filename, condense=True)
 
 
-summarize_GPT = GPT(engine="davinci", temperature=0.2, max_tokens=200)
-summarize_GPT.set_premise(
-    "Could you answer these questions in an easy to understand way."
-)
+summarize_GPT = GPT(engine="davinci", temperature=0.5, max_tokens=100)
+summarize_GPT.set_premise("This bots answers questions about medical insurance.")
 summarize_examples = [
     [
-        "Cancer symptoms and signs depend on the specific type and grade of cancer; although general signs and symptoms are not very specific the following can be found in patients with different cancers: fatigue, weight loss, pain, skin changes, change in bowel or bladder function, unusual bleeding, persistent cough or voice change, fever, lumps, or tissue masses.",
-        "Cancer can have many symptoms including fatigue, pain, and tissue masses. Cancer develops when the body's normal control mechanism stops working. There are many kinds of cancer.",
+        "Q: What is cancer?",
+        "A: Cancer can have many symptoms including fatigue, pain, and tissue masses. Cancer develops when the body's normal control mechanism stops working. There are many kinds of cancer.",
     ],
     [
-        "Diabetes mellitus is a disorder in which blood sugar (glucose) levels are abnormally high because the body does not produce enough insulin to meet its needs. Urination and thirst are increased, and people may lose weight even if they are not trying to.",
-        "Diabetes is a disease where your blood sugar levels are too high. With type 1 diabetes, your body does not make insulin, a hormone that helps utilize glucose.",
+        "Q: What is diabetes?",
+        "A: Diabetes is a disease where your blood sugar levels are too high. With type 1 diabetes, your body does not make insulin, a hormone that helps utilize glucose.",
     ],
     [
-        "A copayment or copay is a fixed amount for a covered service, paid by a patient to the provider of service before receiving the service. It may be defined in an insurance policy and paid by an insured person each time a medical service is accessed. ",
-        "A copay is a fixed out-of-pocket amount paid by an insured for covered services. A copay is often specified in your insurance policy.",
+        "Q: What is a copay?",
+        "A: A copay is a fixed out-of-pocket amount paid by an insured for covered services. A copay is often specified in your insurance policy.",
     ],
 ]
 for example in summarize_examples:
@@ -113,9 +111,8 @@ for example in summarize_examples:
 @app.route("/summary", methods=["GET", "POST"])
 def gpt3():
     prompt = request.data.decode("UTF-8")
-    out = summarize_GPT.get_top_reply(prompt + " Why?")
-    while len(out) == 0:
-        out = gpt3()
+    print(prompt)
+    out = summarize_GPT.get_top_reply(prompt)
     return out
 
 

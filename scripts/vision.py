@@ -70,17 +70,15 @@ def parse_table(filename, condense=False):
     out = []
     for page in document.pages:
         for table_num, table in enumerate(page.tables):
-            header_row = table.header_rows[0]
-            header_text = [_get_text(cell.layout) for cell in header_row.cells]
+            for row_num, row in enumerate(table.header_rows):
+                out.append("|".join([_get_text(cell.layout) for cell in row.cells]))
             for row_num, row in enumerate(table.body_rows):
-                for i, cell in enumerate(row.cells):
-                    out.append(header_text[i] + ": " + _get_text(cell.layout))
-                out.append("")
+                out.append("|".join([_get_text(cell.layout) for cell in row.cells]))
+            out.append("")
+    data = "\n".join(out)[:6000]
 
-    data = ("\n".join(out)).split(" ")[:750]
-    if len(data) < 100:
-        data = document.text.split(" ")
-    data = " ".join(data)
+    if len(data) < 1000:
+        data = document.text
 
     if condense:
         data = summarize(data)
