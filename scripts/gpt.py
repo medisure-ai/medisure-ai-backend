@@ -137,6 +137,7 @@ class GPT:
             n=1,
             stream=False,
             stop=self.stop,
+            frequency_penalty=0,
         )
         return response
 
