@@ -98,8 +98,7 @@ summarize_examples = [
     ],
 ]
 for example in summarize_examples:
-    # summarize_GPT.add_example(Example(example[0], example[1]))
-    pass
+    summarize_GPT.add_example(Example(example[0], example[1]))
 
 
 @app.route("/summary", methods=["GET", "POST"])
