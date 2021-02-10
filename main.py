@@ -24,7 +24,7 @@ app.config["CORS_HEADERS"] = "Content-Type"
 CORS(app)
 
 load_dotenv(find_dotenv(), override=True)
-# set_openai_key(os.getenv("GPT_SECRET_KEY", ""))
+set_openai_key(os.getenv("GPT_SECRET_KEY", ""))
 
 BUCKET_NAME = os.getenv("GOOGLE_BUCKET_NAME", "")
 storage_client = storage.Client()
